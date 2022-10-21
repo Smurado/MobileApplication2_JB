@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/abcliste.iml" filepath="$PROJECT_DIR$/abcliste.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/abcliste_android.iml" filepath="$PROJECT_DIR$/android/abcliste_android.iml" />
+    </modules>
+  </component>
+</project>

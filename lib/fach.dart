@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 
 class Fach extends StatelessWidget {
+
+  late String Bezeichnung;
+  late int CountBuchstaben = 0;
+
+  //erstelle eine zwei Dimensinale Liste.
+  //1. In jedem index der ersten Liste wird eine 2. Liste erstellt.
+  //2. Jeder Index der zweiten Liste wird erstmal mit null Initialisiert
+  //3. Rows könnnen nicht wachsen, Columns aber schon!
+  var Buchstaben = List.generate(26, (i) => List.generate(1, (j) => null, growable: true),growable: false);
+
+  late Icon Symbol;
+
+
+  static Fach createFach(String bezeichnung,  Icon symbol){
+    var tmp = Fach();
+    tmp.Bezeichnung = bezeichnung;
+    tmp.Symbol = symbol;
+    return tmp;
+  }
+
   @override
   Widget build(BuildContext context){
     return Container(

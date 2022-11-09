@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 class Fach extends StatelessWidget {
-
-  late String Bezeichnung;
+  final bezeichnunginput = TextEditingController();
+  late String Bezeichnung = "tessdfsdft";
   late int CountBuchstaben = 0;
+
 
   //erstelle eine zwei Dimensinale Liste.
   //1. In jedem index der ersten Liste wird eine 2. Liste erstellt.
@@ -13,13 +15,53 @@ class Fach extends StatelessWidget {
 
   late Icon Symbol;
 
+  createFachScaffold(){
+    Bezeichnung = "Heyo";
+    Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(padding: EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: () {
+                Fach tmp = Fach();
+                //Hier weiter machen!!!!!!!!
+                //tmp.Bezeichnung = bezeichnunginput.text;
+                //a.add(tmp);
+                //return List.generate(a.length+1, (index) => null);
+              },
+              child: const Icon(
+                Icons.add,
+                size: 30.0,
+              ),
+            ),
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: Row(
+          children: [
+            Container(child: Text("Bezeichnung"),),
+            SizedBox(child: TextField(
+              //input to receive it later
+              controller: bezeichnunginput,
+              decoration: const InputDecoration(border: OutlineInputBorder()
+              ),
+            ),
+              width: 300,
+            )
+          ],
+        ),
+      )
 
-  static Fach createFach(String bezeichnung,  Icon symbol){
-    var tmp = Fach();
-    tmp.Bezeichnung = bezeichnung;
-    tmp.Symbol = symbol;
-    return tmp;
+      );
+  return ;
   }
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context){
@@ -48,6 +90,16 @@ class Fach extends StatelessWidget {
           ),
           ),
           const Icon(Icons.calculate, size: 100, color: Colors.white,),
+          Container(
+              alignment: Alignment.topRight,
+              margin: EdgeInsets.only(right: 20, top: 10),
+              child: Text(Bezeichnung, style: TextStyle(fontSize: 25, color: Colors.white),)
+          ),
+          Container(
+              alignment: Alignment.bottomRight,
+              margin: EdgeInsets.only(right: 20, bottom: 10),
+              child: Text(CountBuchstaben.toString() + " / 26", style: TextStyle(fontSize: 25, color: Colors.white),)
+          ),
         ],
       ),
     );

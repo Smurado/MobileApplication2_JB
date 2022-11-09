@@ -34,16 +34,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Fach> completeListeofFaecher = [Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach(), Fach()];
-
-
-
+  List<Fach> completeListeofFaecher = [Fach()];
+  var tmp = Fach();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Container(
+          alignment: Alignment.center,
+          child: Text("Übersichtsseite")
+        ),
+        leading: Icon(Icons.create),
+        actions: [
+          Padding(padding: EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => tmp.createFachScaffold()),
 
+                );
+                completeListeofFaecher.add(tmp);
+                setState(() {});
+              },
+              child: const Icon(
+                Icons.add,
+                size: 30.0,
+              ),
+            ),
+          )
+        ],
       ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -56,24 +77,5 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         )
         );
-        /*return Scaffold(
-          appBar: CupertinoSliverNavigationBar(
-
-            bottom: CupertinoSliverNavigationBar(
-              children: <Widget>[
-              FlatButton(
-                onPressed: (){
-
-                },
-              ),
-              ],
-            ),
-          ),
-          body: Column(
-            children: <Widget>[
-              Fach(),
-            ],
-          ),
-       ),*/
   }
 }

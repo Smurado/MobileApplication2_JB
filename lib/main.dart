@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:abcliste/ScaffoldForCreatingFach.dart';
 import 'package:abcliste/liste.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:abcliste/fach.dart';
@@ -35,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Fach> completeListeofFaecher = [Fach()];
-  var tmp = Fach();
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           Padding(padding: EdgeInsets.only(right: 20),
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                String result = await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => tmp.createFachScaffold()),
-
+                  MaterialPageRoute(builder: (context) => ScaffoldForCreatingFach()),
                 );
+                Fach tmp = Fach();
+                tmp.bezeichnung = result;
                 completeListeofFaecher.add(tmp);
                 setState(() {});
               },

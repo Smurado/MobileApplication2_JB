@@ -13,11 +13,14 @@ class ScaffoldForListInFach extends StatefulWidget{
 }
 
 class _ScaffoldForListInFach extends State<ScaffoldForListInFach>{
-  List<TextEditingController?> tmp = List.generate(26, (j) => null);
+  List<TextEditingController> tmp = List.generate(26, (j) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
     List<String> buchstaben = widget.list;
+    for(int i = 0; i < 26; i++){
+      tmp[i].text = buchstaben[i];
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +28,9 @@ class _ScaffoldForListInFach extends State<ScaffoldForListInFach>{
           Padding(padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {
-
+                for(int i = 0; i < 26; i++){
+                  buchstaben[i] = tmp[i].text;
+                }
                 Navigator.pop( context, buchstaben);
             },
             child: const Icon(
@@ -53,6 +58,7 @@ class _ScaffoldForListInFach extends State<ScaffoldForListInFach>{
              SizedBox(
                  width: 350,
                  child: TextField(
+                   controller: tmp[index],
                    style: TextStyle(
                        fontSize: 30
                    ),

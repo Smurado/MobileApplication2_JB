@@ -29,10 +29,16 @@ class _ScaffoldForCreatingFach extends State<ScaffoldForCreatingFach>{
           ],
         ),
         body: SafeArea(
-          child: Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(child: Text("Bezeichnung"),),
+              Container(
+                child: Text("Name der Liste:", style: TextStyle(fontSize: 40,),),
+
+                alignment: Alignment.center,
+              ),
               SizedBox(child: TextField(
+                style: TextStyle(fontSize: 40),
                 //input to receive it later
                 controller: bezeichnunginput,
                 decoration: const InputDecoration(border: OutlineInputBorder()

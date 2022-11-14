@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 class ScaffoldForCreatingFach extends StatefulWidget{
 
-
   @override
   State<StatefulWidget> createState() => _ScaffoldForCreatingFach();
 
 }
+//Gibt ein Scaffold zurück welches ermöglicht ein neues Fach anzuglegen
+//Aufgefangen von dem oberen Scaffold wird dann die Bezeichnung welche der Benutzer eingegeben hat
 class _ScaffoldForCreatingFach extends State<ScaffoldForCreatingFach>{
   final bezeichnunginput = TextEditingController();
   @override

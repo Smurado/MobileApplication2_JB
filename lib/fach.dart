@@ -1,10 +1,7 @@
-
 import 'package:abcliste/ScaffoldForListInFach.dart';
-import 'package:abcliste/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:abcliste/main.dart';
 
 List<Fach> welcomeFromJson(String str) => List<Fach>.from(json.decode(str).map((x) => Fach.fromJson(x)));
 
@@ -12,60 +9,50 @@ String welcomeToJson(List<Fach> data) => json.encode(List<dynamic>.from(data.map
 
 class Fach extends StatelessWidget {
 
+  //defualt konsturktor
   Fach({
     required this.bezeichnung,
     required this.countBuchstaben,
     required this.buchstaben,
   });
 
+  //Properties der Klasse
   late String bezeichnung;
   int countBuchstaben;
   List<String> buchstaben;
   bool deleteable = false;
-  //late Icon symbol;
 
+  //toJson Methode welche das Instanzierte Objekt in ein Json umwandeln kann.
   Map<String, dynamic> toJson(){
-    /*List<String> buchstaben =
-    this.buchstaben != null ? this.buchstaben.map((i) => i.toJson()).toList() : null;*/
-
     return{
       'bezeichnung': bezeichnung,
       'countBuchstaben': countBuchstaben,
       'buchstaben': buchstaben,
     };
   }
-  //Fach();
 
-
-
+  //fromJson Methode welche es ermöglicht, ein Objekt aus einem Json zu erzeugen.
   factory Fach.fromJson(Map<String, dynamic> json) => Fach(
     bezeichnung: json["bezeichnung"],
     countBuchstaben: json["countBuchstaben"],
     buchstaben: List<String>.from(json["buchstaben"].map((x) => x)),
   );
 
-  /*
-  factory Fach.fromJson(Map<String, dynamic> parsedjson)
-  {
-    Fach rueckgabe = Fach();
-    rueckgabe.bezeichnung = parsedjson['bezeichnung'] ?? "";
-    rueckgabe.countBuchstaben = parsedjson['countBuchstaben'] ?? "";
-    rueckgabe.buchstaben = parsedjson['buchstaben'] ?? "";
-    return rueckgabe;
-  }*/
-
-
   @override
   Widget build(BuildContext context){
+    //GestureDetector wird zurückgegeben -> liegt als quasi auf jedem Widget in der Liste
     return GestureDetector(
+      //Jedes Element in der Liste wird einen Container verpackt da sich dieser besser in seinen Maßen definieren lässt.
       child: Container(
         height: 120,
         margin: const EdgeInsets.symmetric(
           vertical: 16.0,
           horizontal: 24.0,
         ),
+        //Die Elemente innerhalb des Containers sind in einem Stack angeordnet
         child: Stack(
           children: <Widget>[
+            //Dieser Container definiert den Hintergrund sowie dessen Abrundung an den Ecken
             Container(
               height: 124.0,
               decoration: BoxDecoration(
@@ -81,6 +68,7 @@ class Fach extends StatelessWidget {
                 ],
               ),
             ),
+            //Das Icon welches auf dem Widget angezeigt werden soll
             const Icon(Icons.calculate, size: 100, color: Colors.white,),
             Container(
                 alignment: Alignment.topRight,
@@ -95,11 +83,14 @@ class Fach extends StatelessWidget {
           ],
         ),
       ),
+      //Funktion welche aufgerufen wird, wenn der GestureDetector gedrückt wird.
       onTap: () async {
         List<String> result = await Navigator.push(
           context,
+          //Der Propertie Fach werden alle Buchstaben zurückgegeben, welche
           MaterialPageRoute(builder: (context) => ScaffoldForListInFach(list: buchstaben)),
         );
+        //
         buchstaben = result;
         int count = 0;
         for(int i = 0; i < 26; i++){
@@ -109,10 +100,13 @@ class Fach extends StatelessWidget {
         }
         countBuchstaben = count;
       },
+        //Funtion welche aufgerufen wird, wenn der GestureDetector lange gedrückt wird.
       onLongPress: () {
         showDialog(
             context: context,
             builder: (context) {
+              //gibt ein AlertDialog zurück
+              //wird genutzt für die Frage ob ein Fachobjekt gelöscht werden soll
               return CupertinoAlertDialog(
                 title: Text("Deleting?"),
                 actions: [
@@ -128,19 +122,10 @@ class Fach extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context, rootNavigator: true).pop();
                     },
-
                   )
                 ],
               );
             });
-
-        /*CupertinoAlertDialog(
-          title: Text("Deleting List?"),
-          actions: [
-            CupertinoDialogAction(child: Text("yes"), onPressed: (){deleteable = true;}),
-            CupertinoDialogAction(child: Text("no"), onPressed: (){}),
-          ],
-        );*/
       }
     );
   }

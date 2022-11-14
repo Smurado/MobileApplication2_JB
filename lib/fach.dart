@@ -126,7 +126,7 @@ class Fach extends StatelessWidget {
                   CupertinoDialogAction(
                     child: Text("NO"),
                     onPressed: () {
-
+                      Navigator.of(context, rootNavigator: true).pop();
                     },
 
                   )
